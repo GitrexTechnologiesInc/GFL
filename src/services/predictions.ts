@@ -148,7 +148,7 @@ export async function saveMatchResult(
               const [predMin, predMax] = scoreRange.split('-').map(Number);
               const actualScore = Number(result.totalScore);
               isCorrect = !isNaN(actualScore) && actualScore >= predMin && actualScore <= predMax;
-              points = isCorrect ? 1 : 0;
+              points = isCorrect ? 5 : 0;
             } else {
               isCorrect = false;
               points = 0;

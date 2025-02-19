@@ -240,7 +240,6 @@ export default function MatchPrediction({
         ) : question.type === 'totalScore' ? (
           <div>
             <div className="mb-4">
-              <h3 className="font-medium mb-2">Which team will bat first?</h3>
               <div className="flex gap-2 mb-4">
                 {[selectedMatch.team1, selectedMatch.team2].map(team => (
                   <button
@@ -259,7 +258,6 @@ export default function MatchPrediction({
               </div>
             </div>
             <div>
-              <h3 className="font-medium mb-2">Predict first innings score range (1 pt)</h3>
               <input
                 type="text"
                 value={prediction || ''}
@@ -385,7 +383,7 @@ function getQuestionLabel(type: string): string {
     case 'winner': return 'Who will win?';
     case 'topScorer': return 'Who will be the top scorer?';
     case 'topWicketTaker': return 'Who will take most wickets?';
-    case 'totalScore': return 'Predict total score (range)';
+    case 'totalScore': return 'Predict total score (range) for the team batting first';
     default: return type;
   }
 } 

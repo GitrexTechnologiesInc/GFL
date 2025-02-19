@@ -260,7 +260,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match1',
         matchId: 'match1',
         type: 'totalScore',
-        points: 1,
+        points: 5,
       }
     ]
   },
@@ -296,7 +296,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match2',
         matchId: 'match2',
         type: 'totalScore',
-        points: 1,
+        points: 5,
       }
     ]
   },
@@ -332,7 +332,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match3',
         matchId: 'match3',
         type: 'totalScore',
-        points: 1,
+        points: 5,
       }
     ]
   },
@@ -368,7 +368,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match4',
         matchId: 'match4',
         type: 'totalScore',
-        points: 1,
+        points: 5,
       }
     ]
   }, 
@@ -404,7 +404,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match5',
         matchId: 'match5',
         type: 'totalScore',
-        points: 1,
+        points: 5,
      }
     ]
   },
@@ -440,7 +440,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match6',
         matchId: 'match6',
         type: 'totalScore',
-        points: 1,
+        points: 5,
       },
     ],
   },
@@ -476,7 +476,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match7',
         matchId: 'match7',
         type: 'totalScore',
-        points: 1,
+        points: 5,
         }
     ]
   },
@@ -512,7 +512,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match8',
         matchId: 'match8',
         type: 'totalScore',
-        points: 1,
+        points: 5,
         }
     ]
   },
@@ -548,7 +548,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match9',
         matchId: 'match9',
         type: 'totalScore',
-        points: 1,
+        points: 5,
         }
     ]
   },
@@ -584,7 +584,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match10',
         matchId: 'match10',
         type: 'totalScore',
-        points: 1,
+        points: 5,
         }
     ]
   },
@@ -620,7 +620,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match11',
         matchId: 'match11',
         type: 'totalScore',
-        points: 1,
+        points: 5,
         }
     ]
   },
@@ -656,7 +656,7 @@ const MOCK_MATCHES: Match[] = [
         id: 'q4_match12',
         matchId: 'match12',
         type: 'totalScore',
-        points: 1,
+        points: 5,
   }
     ]
   }

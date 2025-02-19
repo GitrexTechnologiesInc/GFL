@@ -1,12 +1,14 @@
-export interface Prediction {
+export interface User {
   id: string;
-  userId: string;
-  questionId: string;
-  matchId: string;
-  answer: string;
-  isCorrect?: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  username: string;
+  isAdmin: boolean;
+  points: number;
+}
+
+export interface Question {
+  id: string;
+  type: 'winner' | 'topScorer' | 'topWicketTaker' | 'totalScore';
+  points: number;
 }
 
 export interface Match {
@@ -16,15 +18,38 @@ export interface Match {
   team1Flag: string;
   team2Flag: string;
   dueDate: Date;
-  duration: number; // Duration in hours
-  format: 'ODI' | 'T20'; // Added format type
-  status: 'upcoming' | 'in_progress' | 'completed';
+  status: 'upcoming' | 'live' | 'completed';
+  format: string;
+  duration: number;
+  questions: Question[];
   result?: {
     winner?: string;
     topScorer?: string;
     topWicketTaker?: string;
-    firstInningsTeam: string;
-    totalScore?: string; // For admin: actual score (e.g., "235")
+    firstInningsTeam?: string;
+    totalScore?: string;
   };
-  questions: Question[];
+}
+
+export interface Prediction {
+  id: string;
+  userId: string;
+  matchId: string;
+  questionId: string;
+  answer: string;
+  isCorrect?: boolean;
+  points_earned?: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Squad {
+  teamId: string;
+  players: Player[];
+}
+
+export interface Player {
+  id: string;
+  name: string;
+  role: string;
 } 
