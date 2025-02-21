@@ -342,7 +342,7 @@ const MOCK_MATCHES: Match[] = [
     team2: 'Australia',
     team1Flag: '🇧🇩',
     team2Flag: '🇱🇰',
-    dueDate: new Date('2024-02-22 13:29'),
+    dueDate: new Date('2025-02-22 13:29'),
     duration: MATCH_DURATIONS.ODI,
     format: 'ODI',
     questions: [
