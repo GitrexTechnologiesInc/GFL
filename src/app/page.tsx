@@ -626,8 +626,8 @@ const MOCK_MATCHES: Match[] = [
   },
   {
     id: 'match12',
-    team1: 'Pakistan',
-    team2: 'Bangladesh',
+    team1: 'New Zealand',
+    team2: 'India',
     team1Flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
     team2Flag: '🇱🇰',
     dueDate: new Date('2025-03-02 13:29'),
@@ -659,8 +659,116 @@ const MOCK_MATCHES: Match[] = [
         points: 5,
   }
     ]
-  }
-]
+  },
+//   {
+//     id: 'match13',
+//     team1: 'India',
+//     team2: 'South Africa',
+//     team1Flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+//     team2Flag: '🇱🇰',
+//     dueDate: new Date('2025-03-04 13:29'),
+//     duration: MATCH_DURATIONS.ODI,
+//     format: 'ODI',
+//     questions: [
+//       {
+//         id: 'q1_match12',
+//         matchId: 'match12',
+//         type: 'winner',
+//         points: 1,
+//       },
+//       {
+//         id: 'q2_match12',
+//         matchId: 'match12',
+//         type: 'topScorer',
+//         points: 3,
+//       },
+//       {
+//         id: 'q3_match12',
+//         matchId: 'match12',
+//         type: 'topWicketTaker',
+//         points: 3,
+//       },
+//       {
+//         id: 'q4_match12',
+//         matchId: 'match12',
+//         type: 'totalScore',
+//         points: 5,
+//   },
+//     ]
+//   },
+//   {
+//     id: 'match14',
+//     team1: 'Australia',
+//     team2: 'New Zealand',
+//     team1Flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+//     team2Flag: '🇱🇰',
+//     dueDate: new Date('2025-03-05 13:29'),
+//     duration: MATCH_DURATIONS.ODI,
+//     format: 'ODI',
+//     questions: [
+//       {
+//         id: 'q1_match12',
+//         matchId: 'match12',
+//         type: 'winner',
+//         points: 1,
+//       },
+//       {
+//         id: 'q2_match12',
+//         matchId: 'match12',
+//         type: 'topScorer',
+//         points: 3,
+//       },
+//       {
+//         id: 'q3_match12',
+//         matchId: 'match12',
+//         type: 'topWicketTaker',
+//         points: 3,
+//       },
+//       {
+//         id: 'q4_match12',
+//         matchId: 'match12',
+//         type: 'totalScore',
+//         points: 5,
+//   }
+// ]
+//   },
+//   {
+//     id: 'match15',
+//     team1: 'India',
+//     team2: 'Australia',
+//     team1Flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+//     team2Flag: '🇱🇰',
+//     dueDate: new Date('2025-03-05 13:29'),
+//     duration: MATCH_DURATIONS.ODI,
+//     format: 'ODI',
+//     questions: [
+//       {
+//         id: 'q1_match12',
+//         matchId: 'match12',
+//         type: 'winner',
+//         points: 1,
+//       },
+//       {
+//         id: 'q2_match12',
+//         matchId: 'match12',
+//         type: 'topScorer',
+//         points: 3,
+//       },
+//       {
+//         id: 'q3_match12',
+//         matchId: 'match12',
+//         type: 'topWicketTaker',
+//         points: 3,
+//       },
+//       {
+//         id: 'q4_match12',
+//         matchId: 'match12',
+//         type: 'totalScore',
+//         points: 5,
+//   }
+// ]
+//   },
+];
 
 // Mock squad data with organized player roles
 const MOCK_SQUADS: { [key: string]: Squad } = {
