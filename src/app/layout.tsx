@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GFL 2025",
-  description: "GFL 2025 - Gitrex Fantasy League",
+  title: "GFL 2026 - T20 World Cup",
+  description: "GFL 2026 - Gitrex Fantasy League | T20 World Cup Cricket Fantasy League",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gfl-navy`}
       >
         {children}
       </body>

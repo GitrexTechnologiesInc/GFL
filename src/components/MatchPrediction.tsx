@@ -199,6 +199,17 @@ export default function MatchPrediction({
     return match.status === 'upcoming';
   };
 
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'upcoming':
+        return <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-900/40 text-emerald-400 border border-emerald-700/40">Upcoming</span>;
+      case 'in_progress':
+        return <span className="px-3 py-1 rounded-full text-xs font-semibold bg-amber-900/40 text-amber-400 border border-amber-700/40 animate-pulse">In Progress</span>;
+      default:
+        return <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-800/40 text-gray-400 border border-gray-700/40">Completed</span>;
+    }
+  };
+
   const renderQuestion = (question: Question) => {
     const match = matches.find(m => m.id === selectedMatchId);
     if (!match) return null;
@@ -210,28 +221,29 @@ export default function MatchPrediction({
 
     const disabled = !canSubmitPrediction(match) || saving;
 
-    const answerClass = match.status === 'completed'
-      ? isCorrect
-        ? 'bg-green-100 border-green-500'
-        : 'bg-red-100 border-red-500'
-      : 'bg-white';
-
     return (
-      <div key={question.id} className="mb-4">
-        <h3 className="font-medium mb-2">
-          {getQuestionLabel(question.type)} ({question.points} pts)
-        </h3>
+      <div key={question.id} className="mb-5 p-4 rounded-xl bg-gfl-navy/50 border border-gfl-border/40">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="font-semibold text-gray-200">
+            {getQuestionLabel(question.type)}
+          </h3>
+          <span className="text-xs font-bold px-2 py-1 rounded-full bg-gfl-gold/20 text-gfl-gold border border-gfl-gold/30">
+            {question.points} pts
+          </span>
+        </div>
         
         {question.type === 'winner' ? (
-          <div className="flex gap-2">
-            {[selectedMatch.team1, selectedMatch.team2].map(team => (
+          <div className="flex gap-3">
+            {selectedMatch && [selectedMatch.team1, selectedMatch.team2].map(team => (
               <button
                 key={team}
                 onClick={() => handlePredictionChange(question.id, team)}
                 disabled={disabled}
-                className={`flex-1 px-4 py-2 rounded border ${
-                  prediction === team ? 'bg-blue-500 text-white' : 'bg-gray-100'
-                } ${!canSubmitPrediction(match) ? 'cursor-not-allowed opacity-60' : ''}`}
+                className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all duration-200 border ${
+                  prediction === team
+                    ? 'bg-gfl-gold/20 text-gfl-gold border-gfl-gold shadow-glow-gold'
+                    : 'bg-gfl-dark border-gfl-border text-gray-300 hover:border-gfl-gold/40 hover:text-gray-100'
+                } ${disabled ? 'cursor-not-allowed opacity-50' : ''}`}
               >
                 {team}
               </button>
@@ -240,15 +252,16 @@ export default function MatchPrediction({
         ) : question.type === 'totalScore' ? (
           <div>
             <div className="mb-4">
-              <div className="flex gap-2 mb-4">
-                {[selectedMatch.team1, selectedMatch.team2].map(team => (
+              <p className="text-sm text-gray-400 mb-2">Select batting first team:</p>
+              <div className="flex gap-3">
+                {selectedMatch && [selectedMatch.team1, selectedMatch.team2].map(team => (
                   <button
                     key={team}
                     onClick={() => setFirstInningsTeam(team)}
-                    className={`flex-1 p-2 border rounded ${
+                    className={`flex-1 p-3 border rounded-xl font-medium transition-all duration-200 ${
                       firstInningsTeam === team 
-                        ? 'bg-blue-500 text-white' 
-                        : 'bg-gray-100'
+                        ? 'bg-gfl-gold/20 text-gfl-gold border-gfl-gold shadow-glow-gold' 
+                        : 'bg-gfl-dark border-gfl-border text-gray-300 hover:border-gfl-gold/40'
                     }`}
                     disabled={disabled}
                   >
@@ -262,12 +275,12 @@ export default function MatchPrediction({
                 type="text"
                 value={prediction || ''}
                 onChange={(e) => handlePredictionChange(question.id, e.target.value)}
-                placeholder="e.g., 280-290"
-                className="w-full p-2 border rounded"
+                placeholder="e.g., 140-150"
+                className="w-full p-3 border rounded-xl bg-gfl-dark border-gfl-border text-white placeholder-gray-500 focus:border-gfl-gold focus:ring-2 focus:ring-gfl-gold/30 transition-all"
                 disabled={disabled || !firstInningsTeam}
               />
-              <p className="text-sm text-gray-500 mt-1">
-                Score range must be exactly 10 runs (e.g., 280-290)
+              <p className="text-xs text-gray-500 mt-2">
+                Score range must be exactly 10 runs (e.g., 140-150)
               </p>
             </div>
           </div>
@@ -276,11 +289,19 @@ export default function MatchPrediction({
             value={prediction || ''}
             onChange={(e) => handlePredictionChange(question.id, e.target.value)}
             disabled={disabled}
-            className={`w-full p-2 border rounded ${answerClass}`}
+            className={`w-full p-3 border rounded-xl bg-gfl-dark border-gfl-border text-gray-200 focus:border-gfl-gold transition-all ${
+              match.status === 'completed'
+                ? isCorrect
+                  ? 'border-emerald-500 bg-emerald-900/20'
+                  : prediction
+                  ? 'border-red-500 bg-red-900/20'
+                  : ''
+                : ''
+            }`}
           >
             <option value="">Select player</option>
             {Object.values(squads)
-              .filter(squad => [selectedMatch.team1, selectedMatch.team2].includes(squad.teamId))
+              .filter(squad => selectedMatch && [selectedMatch.team1, selectedMatch.team2].includes(squad.teamId))
               .map(squad => squad.players)
               .flat()
               .map(player => (
@@ -292,14 +313,19 @@ export default function MatchPrediction({
         )}
 
         {selectedMatch && selectedMatch.status === 'completed' && selectedMatch.result && (
-          <div className="mt-2 text-sm">
-            Correct answer: {selectedMatch.result[question.type as keyof typeof selectedMatch.result]}
+          <div className={`mt-3 text-sm px-3 py-2 rounded-lg ${
+            isCorrect
+              ? 'bg-emerald-900/30 text-emerald-400 border border-emerald-700/40'
+              : 'bg-red-900/30 text-red-400 border border-red-700/40'
+          }`}>
+            {isCorrect ? '✓' : '✗'} Correct answer: {selectedMatch.result[question.type as keyof typeof selectedMatch.result]}
           </div>
         )}
 
         {!canSubmitPrediction(match) && (
-          <p className="text-sm text-red-500 mt-1">
-            Predictions are closed for this match
+          <p className="text-xs text-red-400 mt-2 flex items-center gap-1">
+            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/></svg>
+            Predictions are locked for this match
           </p>
         )}
       </div>
@@ -307,31 +333,31 @@ export default function MatchPrediction({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="glass-card p-6">
       <div className="mb-6">
-        <label className="block mb-2 font-medium">Select Match</label>
+        <label className="block mb-2 text-sm font-semibold text-gray-300">Select Match</label>
         <select
           value={selectedMatchId}
           onChange={(e) => onMatchSelect(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border rounded-xl bg-gfl-dark border-gfl-border text-gray-200 focus:border-gfl-gold transition-all"
         >
           <option value="">Select a match</option>
-          <optgroup label="Upcoming Matches">
+          <optgroup label="🟢 Upcoming Matches">
             {matches
               .filter(m => m.status === 'upcoming')
-              .slice(0, 3)
+              .slice(0, 6)
               .map((match) => (
                 <option key={match.id} value={match.id}>
                   {match.team1} vs {match.team2} ({new Date(match.dueDate).toLocaleDateString()})
                 </option>
               ))}
           </optgroup>
-          <optgroup label="Past Matches">
+          <optgroup label="⏳ Past Matches">
             {matches
               .filter(m => m.status === 'completed')
               .map((match) => (
                 <option key={match.id} value={match.id}>
-                  {match.team1} vs {match.team2} ({new Date(match.dueDate).toLocaleDateString()}) (Past)
+                  {match.team1} vs {match.team2} ({new Date(match.dueDate).toLocaleDateString()})
                 </option>
               ))}
           </optgroup>
@@ -340,18 +366,16 @@ export default function MatchPrediction({
 
       {selectedMatch && (
         <>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">
-              {selectedMatch.team1} vs {selectedMatch.team2}
-              <span className="ml-2 text-gray-500">
-                ({selectedMatch.status === 'upcoming' ? 'Upcoming' : 
-                  selectedMatch.status === 'in_progress' ? 'In Progress' : 
-                  'Past'})
-              </span>
-            </h2>
-            <div className="text-sm text-gray-500">
-              {new Date(selectedMatch.dueDate).toLocaleString()}
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-3">
+            <div>
+              <h2 className="text-xl font-bold text-white">
+                {selectedMatch.team1} <span className="text-gfl-gold">vs</span> {selectedMatch.team2}
+              </h2>
+              <p className="text-sm text-gray-400 mt-1">
+                {new Date(selectedMatch.dueDate).toLocaleString()}
+              </p>
             </div>
+            {getStatusBadge(selectedMatch.status)}
           </div>
 
           {selectedMatch.questions.map(question => renderQuestion(question))}
@@ -359,16 +383,24 @@ export default function MatchPrediction({
           {unsavedChanges && canSubmitPrediction(selectedMatch) && (
             <div className="mt-6">
               {error && (
-                <div className="text-red-500 mb-2">
+                <div className="bg-red-900/30 border border-red-700/50 text-red-400 text-sm px-4 py-3 rounded-lg mb-3">
                   {error}
                 </div>
               )}
               <button
                 onClick={handleSavePredictions}
                 disabled={saving}
-                className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50"
+                className="w-full bg-gradient-gold text-gfl-navy font-bold py-3 px-4 rounded-xl hover:shadow-glow-gold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-lg"
               >
-                {saving ? 'Saving...' : Object.keys(savedPredictions).length > 0 ? 'Update Predictions' : 'Save Predictions'}
+                {saving ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                    </svg>
+                    Saving...
+                  </span>
+                ) : Object.keys(savedPredictions).length > 0 ? 'Update Predictions' : 'Save Predictions'}
               </button>
             </div>
           )}
@@ -386,4 +418,4 @@ function getQuestionLabel(type: string): string {
     case 'totalScore': return 'Predict total score (range) for the team batting first';
     default: return type;
   }
-} 
+}

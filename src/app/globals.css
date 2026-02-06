@@ -3,19 +3,115 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #0a0e1a;
+  --foreground: #f9fafb;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f0d060;
+}
+
+/* Gold gradient text effect */
+.text-shimmer {
+  background: linear-gradient(135deg, #d4af37, #f0d060, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(26, 34, 54, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Styled select dropdown */
+select {
+  background-color: #1a2236;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+select:focus {
+  border-color: #d4af37;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+}
+
+select option {
+  background-color: #1a2236;
+  color: #f9fafb;
+}
+
+/* Styled input */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: #1a2236;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #d4af37;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+}
+
+input::placeholder {
+  color: #6b7280;
+}
+
+/* Trophy badge for leaderboard */
+.trophy-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.trophy-gold {
+  background: linear-gradient(135deg, #d4af37 0%, #f0d060 100%);
+  color: #0a0e1a;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+.trophy-silver {
+  background: linear-gradient(135deg, #9ca3af 0%, #d1d5db 100%);
+  color: #0a0e1a;
+}
+
+.trophy-bronze {
+  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  color: #0a0e1a;
 }
