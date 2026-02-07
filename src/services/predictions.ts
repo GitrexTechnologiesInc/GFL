@@ -114,7 +114,33 @@ export async function saveMatchResult(
 
     console.log('Processing predictions:', predictions);
 
-    // Process each prediction
+    // First, reverse any previously awarded points for this match
+    // This prevents double-counting when admin updates a result
+    for (const prediction of predictions || []) {
+      const previousPoints = prediction.points_earned || 0;
+      if (previousPoints > 0) {
+        try {
+          const { error: reverseError } = await supabase.rpc('increment_user_points', {
+            user_id: prediction.user_id,
+            points_to_add: -previousPoints
+          });
+
+          if (reverseError) {
+            console.error('Error reversing previous points:', {
+              error: reverseError,
+              userId: prediction.user_id,
+              points: -previousPoints
+            });
+          } else {
+            console.log(`Reversed ${previousPoints} points for user ${prediction.user_id}`);
+          }
+        } catch (error) {
+          console.error('Error reversing points:', error);
+        }
+      }
+    }
+
+    // Now process each prediction and calculate fresh points
     for (const prediction of predictions || []) {
       const questionType = prediction.question_id.split('_')[0].replace('q', '');
       let isCorrect = false;
@@ -192,7 +218,7 @@ export async function saveMatchResult(
         continue;
       }
 
-      // Update user points if prediction is correct
+      // Award new points if prediction is correct
       if (points > 0) {
         try {
           const { error: userError } = await supabase.rpc('increment_user_points', {
