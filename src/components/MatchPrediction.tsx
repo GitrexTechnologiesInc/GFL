@@ -39,24 +39,24 @@ export default function MatchPrediction({
   const selectedMatch = matches.find(m => m.id === selectedMatchId);
   const isPastMatch = selectedMatch ? new Date(selectedMatch.dueDate) < new Date() : false;
 
-  // Load existing predictions when match or userPredictions changes
+  // Load existing predictions when match selection or saved predictions change
   useEffect(() => {
-    if (!selectedMatch) return;
+    if (!selectedMatchId) return;
     
     // Filter predictions for current match and create a map
     const currentMatchPredictions = userPredictions
-      .filter(p => p.matchId === selectedMatch.id)
+      .filter(p => p.matchId === selectedMatchId)
       .reduce((acc, pred) => ({
         ...acc,
         [pred.questionId]: pred.answer
       }), {});
 
-    console.log('Loading predictions for match:', selectedMatch.id, currentMatchPredictions);
+    console.log('Loading predictions for match:', selectedMatchId, currentMatchPredictions);
     
     setPredictions(currentMatchPredictions);
     setSavedPredictions(
       userPredictions
-        .filter(p => p.matchId === selectedMatch.id)
+        .filter(p => p.matchId === selectedMatchId)
         .reduce((acc, pred) => ({
           ...acc,
           [pred.questionId]: {
@@ -66,8 +66,9 @@ export default function MatchPrediction({
           }
         }), {})
     );
+    setFirstInningsTeam('');
     setUnsavedChanges(false);
-  }, [selectedMatch, userPredictions]);
+  }, [selectedMatchId, userPredictions]);
 
   const handlePredictionChange = (questionId: string, answer: string) => {
     setPredictions(prev => {
