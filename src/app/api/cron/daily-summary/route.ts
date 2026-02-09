@@ -171,22 +171,18 @@ export async function GET(request: Request) {
       });
     }
 
-    // Leaderboard section — sorted by daily gains, showing only the delta
-    const leaderboardByGains = [...playerSummaries]
-      .sort((a, b) => b.pointsGained - a.pointsGained);
-
-    message += `🏆 *Yesterday's Leaderboard:*\n`;
+    // Leaderboard section — sorted by total points, with daily gains in parentheses
+    message += `🏆 *Leaderboard:*\n`;
     message += '```\n';
     message += 'Rank  Player                 Pts\n';
     message += '────  ─────────────────────  ───\n';
 
-    leaderboardByGains.forEach((p, index) => {
-      const rank = index + 1;
-      const medal = rank <= 3 ? MEDALS[rank - 1] : `${rank}.`;
-      const rankStr = medal.padEnd(6);
+    playerSummaries.forEach(p => {
+      const rankStr = p.medal.padEnd(6);
       const nameStr = p.username.padEnd(23);
-      const ptsStr = p.pointsGained > 0 ? `+${p.pointsGained}` : `${p.pointsGained}`;
-      message += `${rankStr}${nameStr}${ptsStr}\n`;
+      const ptsStr = String(p.points);
+      const change = p.pointsGained > 0 ? ` (+${p.pointsGained})` : '';
+      message += `${rankStr}${nameStr}${ptsStr}${change}\n`;
     });
 
     message += '```\n';
