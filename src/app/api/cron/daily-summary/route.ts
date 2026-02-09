@@ -68,31 +68,25 @@ export async function GET(request: Request) {
       }
     }
 
-    // 3. Get recently evaluated correct predictions (since last snapshot)
-    // These are predictions that earned points and were updated after the last snapshot
+    // 3. Get correct predictions from the previous day only
+    // Use the last snapshot date as the cutoff — only show predictions evaluated after it
+    const cutoffDate = lastSnapshotDate
+      ? new Date(lastSnapshotDate + 'T00:00:00Z').toISOString()
+      : new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(); // fallback: last 24 hours
+
     const { data: recentPredictions, error: predError } = await supabase
       .from('predictions')
       .select('*')
       .gt('points_earned', 0)
+      .gt('updated_at', cutoffDate)
       .order('updated_at', { ascending: false });
 
-    // Build a map of user_id -> array of correct predictions (only recent ones)
+    // Build a map of user_id -> array of correct predictions from previous day
     const userCorrectPredictions: { [userId: string]: Array<{ questionType: string; answer: string; points: number }> } = {};
 
     if (recentPredictions && !predError) {
       for (const pred of recentPredictions) {
         const userId = pred.user_id;
-        const prevPts = previousPoints[userId] ?? 0;
-        const currentUser = users.find(u => u.id === userId);
-        const pointsGained = (currentUser?.points ?? 0) - prevPts;
-
-        // Only include predictions for users who actually gained points since last snapshot
-        if (pointsGained <= 0) continue;
-
-        // Check if this prediction was updated after the last snapshot
-        if (lastSnapshotDate && new Date(pred.updated_at) <= new Date(lastSnapshotDate + 'T00:00:00Z')) {
-          continue;
-        }
 
         const questionType = pred.question_id.split('_')[0].replace('q', '');
         let displayAnswer = pred.answer;
@@ -177,18 +171,22 @@ export async function GET(request: Request) {
       });
     }
 
-    // Leaderboard section
-    message += `🏆 *Leaderboard:*\n`;
+    // Leaderboard section — sorted by daily gains, showing only the delta
+    const leaderboardByGains = [...playerSummaries]
+      .sort((a, b) => b.pointsGained - a.pointsGained);
+
+    message += `🏆 *Yesterday's Leaderboard:*\n`;
     message += '```\n';
     message += 'Rank  Player                 Pts\n';
     message += '────  ─────────────────────  ───\n';
 
-    playerSummaries.forEach(p => {
-      const rankStr = p.medal.padEnd(6);
+    leaderboardByGains.forEach((p, index) => {
+      const rank = index + 1;
+      const medal = rank <= 3 ? MEDALS[rank - 1] : `${rank}.`;
+      const rankStr = medal.padEnd(6);
       const nameStr = p.username.padEnd(23);
-      const ptsStr = String(p.points);
-      const change = p.pointsGained > 0 ? ` (+${p.pointsGained})` : '';
-      message += `${rankStr}${nameStr}${ptsStr}${change}\n`;
+      const ptsStr = p.pointsGained > 0 ? `+${p.pointsGained}` : `${p.pointsGained}`;
+      message += `${rankStr}${nameStr}${ptsStr}\n`;
     });
 
     message += '```\n';
