@@ -459,7 +459,7 @@ const MOCK_SQUADS: { [key: string]: Squad } = {
     teamId: 'Australia',
     players: [
       { id: 'aus_1', name: 'Travis Head', role: 'batsman' },
-      { id: 'aus_2', name: 'Matthew Short', role: 'batsman' },
+      { id: 'aus_2', name: 'Matt Renshaw', role: 'batsman' },
       { id: 'aus_3', name: 'Tim David', role: 'batsman' },
       { id: 'aus_4', name: 'Josh Inglis', role: 'wicketKeeper' },
       { id: 'aus_5', name: 'Mitchell Marsh', role: 'allRounder' },
@@ -467,7 +467,7 @@ const MOCK_SQUADS: { [key: string]: Squad } = {
       { id: 'aus_7', name: 'Marcus Stoinis', role: 'allRounder' },
       { id: 'aus_8', name: 'Cameron Green', role: 'allRounder' },
       { id: 'aus_9', name: 'Cooper Connolly', role: 'allRounder' },
-      { id: 'aus_10', name: 'Pat Cummins', role: 'bowler' },
+      { id: 'aus_10', name: 'Ben Dwarshuis', role: 'bowler' },
       { id: 'aus_11', name: 'Josh Hazlewood', role: 'bowler' },
       { id: 'aus_12', name: 'Adam Zampa', role: 'bowler' },
       { id: 'aus_13', name: 'Nathan Ellis', role: 'bowler' },
