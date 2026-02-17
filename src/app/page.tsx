@@ -485,7 +485,7 @@ const MOCK_SQUADS: { [key: string]: Squad } = {
       { id: 'sl_5', name: 'Kamindu Mendis', role: 'allRounder' },
       { id: 'sl_6', name: 'Dasun Shanaka', role: 'allRounder' },
       { id: 'sl_7', name: 'Dhananjaya de Silva', role: 'allRounder' },
-      { id: 'sl_8', name: 'Wanindu Hasaranga', role: 'allRounder' },
+      { id: 'sl_8', name: 'Dushan Hemantha', role: 'allRounder' },
       { id: 'sl_9', name: 'Dunith Wellalage', role: 'allRounder' },
       { id: 'sl_10', name: 'Maheesh Theekshana', role: 'bowler' },
       { id: 'sl_11', name: 'Matheesha Pathirana', role: 'bowler' },
