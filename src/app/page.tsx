@@ -309,34 +309,34 @@ const MOCK_MATCHES: Match[] = [
   // ==================== SUPER EIGHTS ====================
 
   // --- Sat, 21 Feb 2026 ---
-  { id: 'match41', team1: 'TBA (Y2)', team2: 'TBA (Y3)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-21 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match41') },
+  { id: 'match41', team1: 'New Zealand', team2: 'Pakistan', team1Flag: '🇳🇿', team2Flag: '🇵🇰', dueDate: new Date('2026-02-21 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match41') },
 
   // --- Sun, 22 Feb 2026 ---
-  { id: 'match42', team1: 'TBA (Y1)', team2: 'TBA (Y4)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-22 14:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match42') },
-  { id: 'match43', team1: 'TBA (X1)', team2: 'TBA (X4)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-22 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match43') },
+  { id: 'match42', team1: 'Sri Lanka', team2: 'England', team1Flag: '🇱🇰', team2Flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', dueDate: new Date('2026-02-22 14:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match42') },
+  { id: 'match43', team1: 'India', team2: 'South Africa', team1Flag: '🇮🇳', team2Flag: '🇿🇦', dueDate: new Date('2026-02-22 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match43') },
 
   // --- Mon, 23 Feb 2026 ---
-  { id: 'match44', team1: 'TBA (X2)', team2: 'TBA (X3)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-23 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match44') },
+  { id: 'match44', team1: 'Zimbabwe', team2: 'West Indies', team1Flag: '🇿🇼', team2Flag: '🌴', dueDate: new Date('2026-02-23 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match44') },
 
   // --- Tue, 24 Feb 2026 ---
-  { id: 'match45', team1: 'TBA (Y1)', team2: 'TBA (Y3)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-24 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match45') },
+  { id: 'match45', team1: 'England', team2: 'Pakistan', team1Flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', team2Flag: '🇵🇰', dueDate: new Date('2026-02-24 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match45') },
 
   // --- Wed, 25 Feb 2026 ---
-  { id: 'match46', team1: 'TBA (Y2)', team2: 'TBA (Y4)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-25 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match46') },
+  { id: 'match46', team1: 'Sri Lanka', team2: 'New Zealand', team1Flag: '🇱🇰', team2Flag: '🇳🇿', dueDate: new Date('2026-02-25 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match46') },
 
   // --- Thu, 26 Feb 2026 ---
-  { id: 'match47', team1: 'TBA (X3)', team2: 'TBA (X4)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-26 14:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match47') },
-  { id: 'match48', team1: 'TBA (X1)', team2: 'TBA (X2)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-26 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match48') },
+  { id: 'match47', team1: 'West Indies', team2: 'South Africa', team1Flag: '🌴', team2Flag: '🇿🇦', dueDate: new Date('2026-02-26 14:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match47') },
+  { id: 'match48', team1: 'India', team2: 'Zimbabwe', team1Flag: '🇮🇳', team2Flag: '🇿🇼', dueDate: new Date('2026-02-26 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match48') },
 
   // --- Fri, 27 Feb 2026 ---
-  { id: 'match49', team1: 'TBA (Y1)', team2: 'TBA (Y2)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-27 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match49') },
+  { id: 'match49', team1: 'England', team2: 'New Zealand', team1Flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', team2Flag: '🇳🇿', dueDate: new Date('2026-02-27 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match49') },
 
   // --- Sat, 28 Feb 2026 ---
-  { id: 'match50', team1: 'TBA (Y3)', team2: 'TBA (Y4)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-02-28 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match50') },
+  { id: 'match50', team1: 'Sri Lanka', team2: 'Pakistan', team1Flag: '🇱🇰', team2Flag: '🇵🇰', dueDate: new Date('2026-02-28 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match50') },
 
   // --- Sun, 01 Mar 2026 ---
-  { id: 'match51', team1: 'TBA (X2)', team2: 'TBA (X4)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-03-01 14:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match51') },
-  { id: 'match52', team1: 'TBA (X1)', team2: 'TBA (X3)', team1Flag: '🏏', team2Flag: '🏏', dueDate: new Date('2026-03-01 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match52') },
+  { id: 'match51', team1: 'Zimbabwe', team2: 'South Africa', team1Flag: '🇿🇼', team2Flag: '🇿🇦', dueDate: new Date('2026-03-01 14:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match51') },
+  { id: 'match52', team1: 'India', team2: 'West Indies', team1Flag: '🇮🇳', team2Flag: '🌴', dueDate: new Date('2026-03-01 18:30'), duration: MATCH_DURATIONS.T20, format: 'T20', questions: makeQuestions('match52') },
 
   // ==================== KNOCKOUTS ====================
 
